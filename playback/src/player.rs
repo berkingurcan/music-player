@@ -181,7 +181,7 @@ impl PlayerEngine for Player {
     }
 
     fn shuffle(&self) {
-        seld.command(PlayerCommand::Shuffle);
+        self.command(PlayerCommand::Shuffle);
     }
 
     fn play_track_at(&self, index: usize) {
@@ -528,6 +528,10 @@ impl PlayerInternal {
         }
     }
 
+    fn handle_shuffle(&mut self) {
+        
+    } 
+
     fn handle_play_track_at(&mut self, index: usize) {
         let (current_track, _) = self.tracklist.play_track_at(index);
         if current_track.is_some() {
@@ -688,6 +692,7 @@ enum PlayerCommand {
     Seek(u32),
     Next,
     Previous,
+    Shuffle,
     PlayTrackAt(usize),
     AddEventSender(mpsc::UnboundedSender<PlayerEvent>),
     Clear,
