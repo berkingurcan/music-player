@@ -51,6 +51,7 @@ pub trait PlayerEngine: Send + Sync {
     fn seek(&self, position_ms: u32);
     fn next(&self);
     fn previous(&self);
+    fn shuffle(&self);
     fn play_track_at(&self, index: usize);
     fn clear(&self);
     async fn get_tracks(&self) -> (Vec<Track>, Vec<Track>);
@@ -177,6 +178,10 @@ impl PlayerEngine for Player {
 
     fn previous(&self) {
         self.command(PlayerCommand::Previous);
+    }
+
+    fn shuffle(&self) {
+        seld.command(PlayerCommand::Shuffle);
     }
 
     fn play_track_at(&self, index: usize) {
@@ -380,6 +385,7 @@ impl PlayerInternal {
             PlayerCommand::AddEventSender(sender) => self.event_senders.push(sender),
             PlayerCommand::Next => self.handle_next(),
             PlayerCommand::Previous => self.handle_previous(),
+            PlayerCommand::Shuffle => self.handle_shuffle(),
             PlayerCommand::PlayTrackAt(index) => self.handle_play_track_at(index),
             PlayerCommand::Clear => self.handle_clear(),
             PlayerCommand::GetTracks => self.handle_get_tracks(),
