@@ -529,7 +529,7 @@ impl PlayerInternal {
     }
 
     fn handle_shuffle(&mut self) {
-        
+        todo!()
     } 
 
     fn handle_play_track_at(&mut self, index: usize) {
